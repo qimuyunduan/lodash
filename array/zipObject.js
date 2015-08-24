@@ -1,4 +1,5 @@
-var isArray = require('../lang/isArray');
+var baseSet = require('../internal/baseSet'),
+    isArray = require('../lang/isArray');
 
 /**
  * The inverse of `_.pairs`; this method returns an object composed from arrays
@@ -8,7 +9,6 @@ var isArray = require('../lang/isArray');
  *
  * @static
  * @memberOf _
- * @alias object
  * @category Array
  * @param {Array} props The property names.
  * @param {Array} [values=[]] The property values.
@@ -32,9 +32,9 @@ function zipObject(props, values) {
   while (++index < length) {
     var key = props[index];
     if (values) {
-      result[key] = values[index];
+      baseSet(result, key, values[index]);
     } else if (key) {
-      result[key[0]] = key[1];
+      baseSet(result, key[0], key[1]);
     }
   }
   return result;
