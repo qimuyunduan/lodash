@@ -1,3 +1,4 @@
+import baseSet from '../internal/baseSet';
 import isArray from '../lang/isArray';
 
 /**
@@ -8,7 +9,6 @@ import isArray from '../lang/isArray';
  *
  * @static
  * @memberOf _
- * @alias object
  * @category Array
  * @param {Array} props The property names.
  * @param {Array} [values=[]] The property values.
@@ -32,9 +32,9 @@ function zipObject(props, values) {
   while (++index < length) {
     var key = props[index];
     if (values) {
-      result[key] = values[index];
+      baseSet(result, key, values[index]);
     } else if (key) {
-      result[key[0]] = key[1];
+      baseSet(result, key[0], key[1]);
     }
   }
   return result;
